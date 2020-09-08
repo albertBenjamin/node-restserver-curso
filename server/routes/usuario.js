@@ -4,14 +4,16 @@ const _ = require('underscore');
 
 const app = express();
 const Usuario = require('../models/usuario');
+const { verificaToken, verificaAdminRole } = require('../middlewares/autenticacion');
 const { response } = require('express');
 
-app.get('/usuario', function(req, res) {
+app.get('/usuario', verificaToken, (req, res) => {
+
 
     let desde = req.query.desde || 0;
     desde = Number(desde);
 
-    let limite = req.query.limite || 5;
+    let limite = req.query.limite || 20;
     limite = Number(limite);
 
     //filtrado de campos
@@ -37,7 +39,7 @@ app.get('/usuario', function(req, res) {
 
 });
 
-app.post('/usuario', function(req, res) {
+app.post('/usuario', [verificaToken, verificaAdminRole], (req, res) => {
     let body = req.body;
 
     let usuario = new Usuario({
@@ -65,7 +67,7 @@ app.post('/usuario', function(req, res) {
     });
 });
 
-app.put('/usuario/:id', function(req, res) {
+app.put('/usuario/:id', [verificaToken, verificaAdminRole], (req, res) => {
 
     let id = req.params.id;
     //undescore pick
@@ -89,7 +91,7 @@ app.put('/usuario/:id', function(req, res) {
     });
 });
 
-app.delete('/usuario/:id', function(req, res) {
+app.delete('/usuario/:id', [verificaToken, verificaAdminRole], (req, res) => {
 
     let id = req.params.id;
     let cambiaEstado = {

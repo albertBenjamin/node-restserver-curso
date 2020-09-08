@@ -13,6 +13,13 @@ if (process.env.NODE_ENV === 'dev') {
 } else {
     urlBD = process.env.MONGO_URI;
 }
+//vencimiento del token
+// 60 se gundos * 60 minutos * 24 horas * 30 dias
+
+process.env.CADUCIDAD_TOKEN = 60 * 60 * 24 * 30;
+
+// SECRET DE TOKEN
+process.env.SECRET_TOKEN = process.env.SECRET_TOKEN || 'aeiou';
 
 process.env.URLDB = urlBD;
 //mongodb: //localhost:27017/cafe
