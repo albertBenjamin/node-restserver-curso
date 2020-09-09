@@ -13,6 +13,10 @@ if (process.env.NODE_ENV === 'dev') {
 } else {
     urlBD = process.env.MONGO_URI;
 }
+
+process.env.URLDB = urlBD;
+//mongodb: //localhost:27017/cafe
+
 //vencimiento del token
 // 60 se gundos * 60 minutos * 24 horas * 30 dias
 
@@ -21,7 +25,6 @@ process.env.CADUCIDAD_TOKEN = 60 * 60 * 24 * 30;
 // SECRET DE TOKEN
 process.env.SECRET_TOKEN = process.env.SECRET_TOKEN || 'aeiou';
 
-process.env.URLDB = urlBD;
-//mongodb: //localhost:27017/cafe
 
-//mongodb + srv: //albert:2S7zrc5F2mkkWf4c@cluster0.9xw5e.mongodb.net/test
+//Google client Id
+process.env.CLIENT_ID = process.env.CLIENT_ID || '317902030202-e14qen88c7mllrfm8nsqtui3k35qc9eb.apps.googleusercontent.com';
